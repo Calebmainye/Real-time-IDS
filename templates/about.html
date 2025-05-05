@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}About - CyberShield IDS{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="about-header text-center mb-5">
+                    <h1>About CyberShield IDS</h1>
+                    <p class="lead">A next-generation intrusion detection system powered by machine learning</p>
+                </div>
+
+                <div class="card shadow-sm mb-5">
+                    <div class="card-body p-lg-5">
+                        <div class="row align-items-center mb-5">
+                            <div class="col-md-6">
+                                <h2>What is CyberShield IDS?</h2>
+                                <p>CyberShield IDS is an advanced network intrusion detection system that uses machine learning to identify potential security threats in real-time. By analyzing network traffic patterns and comparing them to known attack signatures, CyberShield can detect both known and zero-day attacks with high accuracy.</p>
+                                <p>Our system utilizes a Random Forest classifier trained on an extensive dataset of network traffic, capable of distinguishing between normal traffic and various types of network intrusions.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="about-image">
+                                    <div class="cyber-shield-static">
+                                        <div class="shield-container">
+                                            <div class="shield"></div>
+                                            <div class="data-particles"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <h2>Key Features</h2>
+                                <div class="row g-4 mt-2">
+                                    <div class="col-md-4">
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+                                                <i class="fas fa-bolt"></i>
+                                            </div>
+                                            <h4>Real-time Detection</h4>
+                                            <p>Monitor and analyze network traffic in real-time, providing immediate alerts when suspicious activities are detected.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+                                                <i class="fas fa-brain"></i>
+                                            </div>
+                                            <h4>Machine Learning</h4>
+                                            <p>Utilizes Random Forest algorithm trained on extensive network traffic datasets for high-accuracy threat detection.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <h4>Visual Dashboard</h4>
+                                            <p>Comprehensive visualization tools for monitoring network traffic and security status at a glance.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+                                                <i class="fas fa-file-upload"></i>
+                                            </div>
+                                            <h4>Batch Processing</h4>
+                                            <p>Upload and analyze batches of network traffic data for comprehensive security audits.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+                                                <i class="fas fa-keyboard"></i>
+                                            </div>
+                                            <h4>Manual Analysis</h4>
+                                            <p>Input individual packet data for detailed analysis and threat assessment.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="feature-item">
+                                            <div class="feature-icon">
+                                                <i class="fas fa-bell"></i>
+                                            </div>
+                                            <h4>Alert System</h4>
+                                            <p>Comprehensive alert system with detailed information about detected threats.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <h2>Our Technology</h2>
+                                <div class="technology-section">
+                                    <h4>Random Forest Classifier</h4>
+                                    <p>CyberShield IDS uses a Random Forest classifier, a powerful ensemble learning method that operates by constructing multiple decision trees during training. This approach offers several advantages:</p>
+                                    <ul>
+                                        <li>High accuracy in detecting complex intrusion patterns</li>
+                                        <li>Robust performance against noisy data</li>
+                                        <li>Effective feature importance identification</li>
+                                        <li>Low false positive rates compared to traditional methods</li>
+                                    </ul>
+                                    
+                                    <h4 class="mt-4">Feature Selection</h4>
+                                    <p>Our model utilizes 30 carefully selected network traffic features, including:</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li>Flow duration metrics</li>
+                                                <li>Packet length statistics</li>
+                                                <li>Inter-arrival time (IAT) measurements</li>
+                                                <li>TCP flag counts</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul>
+                                                <li>Flow packet rates</li>
+                                                <li>Window size parameters</li>
+                                                <li>Directional metrics</li>
+                                                <li>Protocol-specific indicators</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <h4 class="mt-4">Optimized Threshold</h4>
+                                    <p>Our system uses an optimized detection threshold of 0.77, determined through extensive testing to balance sensitivity and specificity for the most accurate intrusion detection.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>How It Works</h2>
+                                <div class="workflow-timeline mt-4">
+                                    <div class="workflow-item">
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-network-wired"></i>
+                                        </div>
+                                        <div class="workflow-content">
+                                            <h4>1. Data Collection</h4>
+                                            <p>Network traffic is captured and preprocessed to extract relevant features.</p>
+                                        </div>
+                                    </div>
+                                    <div class="workflow-item">
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-project-diagram"></i>
+                                        </div>
+                                        <div class="workflow-content">
+                                            <h4>2. Feature Extraction</h4>
+                                            <p>The system extracts 30 critical features from the network data for analysis.</p>
+                                        </div>
+                                    </div>
+                                    <div class="workflow-item">
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-balance-scale"></i>
+                                        </div>
+                                        <div class="workflow-content">
+                                            <h4>3. Data Normalization</h4>
+                                            <p>Features are scaled to ensure optimal model performance.</p>
+                                        </div>
+                                    </div>
+                                    <div class="workflow-item">
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-brain"></i>
+                                        </div>
+                                        <div class="workflow-content">
+                                            <h4>4. Prediction</h4>
+                                            <p>The Random Forest model analyzes the data and generates intrusion probability scores.</p>
+                                        </div>
+                                    </div>
+                                    <div class="workflow-item">
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-filter"></i>
+                                        </div>
+                                        <div class="workflow-content">
+                                            <h4>5. Threshold Application</h4>
+                                            <p>Probability scores are compared against the optimal threshold to classify traffic.</p>
+                                        </div>
+                                    </div>
+                                    <div class="workflow-item">
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-bell"></i>
+                                        </div>
+                                        <div class="workflow-content">
+                                            <h4>6. Alert Generation</h4>
+                                            <p>Detailed alerts are generated for any traffic classified as intrusions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-section text-center mb-5">
+                    <h2>Our Team</h2>
+                    <p class="lead mb-5">Meet the cybersecurity experts behind CyberShield IDS</p>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="team-member">
+                                <div class="avatar-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h4>Caleb Mainye</h4>
+                                <p class="title">Data Scientist</p>
+                                <p class="description">Specializes in machine learning algorithms and feature engineering for security applications.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="team-member">
+                                <div class="avatar-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h4>Proffeser Odeo</h4>
+                                <p class="title">Project Supervisor</p>
+                                <p class="description">Project Supervisor.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="team-member">
+                                <div class="avatar-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h4>Alex Johnson</h4>
+                                <p class="title">UX/UI Designer</p>
+                                <p class="description">Expertise in creating intuitive interfaces for complex cybersecurity tools.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section text-center">
+                    <h2>Ready to Secure Your Network?</h2>
+                    <p class="lead mb-4">Start using CyberShield IDS today and protect your infrastructure from cyber threats.</p>
+                    {% if session.get('user') %}
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg px-5">
+                        <i class="fas fa-chart-line"></i> Go to Dashboard
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg px-5">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

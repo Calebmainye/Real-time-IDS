@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Manual Input - CyberShield IDS{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="manual-input-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0"><i class="fas fa-keyboard"></i> Manual Network Packet Input</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Enter network packet feature values manually to analyze individual packets for potential intrusions.
+                        </div>
+
+                        <form id="manual-input-form">
+                            <div class="row">
+                                {% for feature in features %}
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="{{ feature }}" class="form-label">{{ feature }}</label>
+                                        <input type="number" step="any" class="form-control" id="{{ feature }}" name="{{ feature }}" required>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between">
+                                        <button type="button" class="btn btn-secondary" id="random-values">
+                                            <i class="fas fa-random"></i> Generate Random Values
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" id="clear-form">
+                                            <i class="fas fa-eraser"></i> Clear Form
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-search"></i> Analyze Packet
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Card (Initially Hidden) -->
+                <div class="card mt-4 shadow-sm d-none" id="manual-results-card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0"><i class="fas fa-chart-pie"></i> Analysis Result</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="result-info text-center py-4">
+                            <div id="result-icon-safe" class="result-icon safe d-none">
+                                <i class="fas fa-shield-alt fa-5x"></i>
+                            </div>
+                            <div id="result-icon-danger" class="result-icon danger d-none">
+                                <i class="fas fa-exclamation-triangle fa-5x"></i>
+                            </div>
+                            
+                            <h3 id="result-title" class="mt-4"></h3>
+                            <p id="result-description" class="lead"></p>
+                            
+                            <div class="confidence-bar mt-4">
+                                <h5>Confidence Level</h5>
+                                <div class="progress" style="height: 25px;">
+                                    <div class="progress-bar" id="confidence-bar" role="progressbar" style="width: 0%">0%</div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-1">
+                                    <small>Safe</small>
+                                    <small>Threshold: <span id="threshold-value">0.75</span></small>
+                                    <small>Intrusion</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-importance mt-4">
+                            <h4><i class="fas fa-info-circle"></i> Key Factors</h4>
+                            <p>These features contributed most significantly to the prediction:</p>
+                            <div class="row" id="feature-importance-row">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                            <button type="button" class="btn btn-primary" id="analyze-another">
+                                <i class="fas fa-sync-alt"></i> Analyze Another Packet
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="view-all-features">
+                                <i class="fas fa-list"></i> View All Features
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for All Features -->
+<div class="modal fade" id="all-features-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">All Packet Features</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-sm" id="all-features-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/prediction.js') }}"></script>
+{% endblock %}

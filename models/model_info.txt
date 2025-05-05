@@ -1,0 +1,4 @@
+model_name: Random Forest
+model_type: RandomForestClassifier
+feature_count: 30
+creation_date: 2025-04-09 23:54:20

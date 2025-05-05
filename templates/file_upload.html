@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block title %}File Upload - CyberShield IDS{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="file-upload-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0"><i class="fas fa-file-upload"></i> Upload Network Traffic Data</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="upload-info">
+                                    <h4>File Requirements</h4>
+                                    <ul>
+                                        <li>File must be in CSV format</li>
+                                        <li>Each row represents a network flow or packet</li>
+                                        <li>Must contain the following features:</li>
+                                    </ul>
+                                    <div class="features-list">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <ul>
+                                                    <li>destination_port</li>
+                                                    <li>flow_duration</li>
+                                                    <li>fwd_packet_length_max</li>
+                                                    <li>fwd_packet_length_min</li>
+                                                    <li>fwd_packet_length_mean</li>
+                                                    <li>bwd_packet_length_max</li>
+                                                    <li>bwd_packet_length_min</li>
+                                                    <li>flow_packets/s</li>
+                                                    <li>flow_iat_mean</li>
+                                                    <li>flow_iat_std</li>
+                                                    <li>flow_iat_max</li>
+                                                    <li>fwd_iat_mean</li>
+                                                    <li>fwd_iat_std</li>
+                                                    <li>fwd_iat_min</li>
+                                                    <li>bwd_iat_std</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <ul>
+                                                    <li>bwd_iat_max</li>
+                                                    <li>bwd_iat_min</li>
+                                                    <li>fwd_psh_flags</li>
+                                                    <li>bwd_packets/s</li>
+                                                    <li>min_packet_length</li>
+                                                    <li>max_packet_length</li>
+                                                    <li>packet_length_mean</li>
+                                                    <li>packet_length_variance</li>
+                                                    <li>fin_flag_count</li>
+                                                    <li>psh_flag_count</li>
+                                                    <li>ack_flag_count</li>
+                                                    <li>urg_flag_count</li>
+                                                    <li>down/up_ratio</li>
+                                                    <li>init_win_bytes_backward</li>
+                                                    <li>idle_std</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="upload-form">
+                                    <form id="upload-form" enctype="multipart/form-data">
+                                        <div class="upload-area mb-4">
+                                            <div class="drop-zone">
+                                                <span class="drop-zone__prompt">
+                                                    <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                                                    <p>Drag & Drop file here or click to browse</p>
+                                                </span>
+                                                <input type="file" name="file" id="file-input" class="drop-zone__input" accept=".csv">
+                                            </div>
+                                        </div>
+                                        <div id="file-info" class="mb-4 d-none">
+                                            <div class="alert alert-info">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-file-csv me-3 fa-2x"></i>
+                                                    <div>
+                                                        <h5 class="file-name mb-1"></h5>
+                                                        <p class="file-size mb-0"></p>
+                                                    </div>
+                                                    <button type="button" class="btn-close ms-auto" id="remove-file"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary btn-lg" id="analyze-btn" disabled>
+                                                <i class="fas fa-search"></i> Analyze Traffic
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Card (Initially Hidden) -->
+                <div class="card mt-4 shadow-sm d-none" id="results-card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0"><i class="fas fa-chart-pie"></i> Analysis Results</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="results-summary mb-4">
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <div class="result-item">
+                                        <h4>Total Packets</h4>
+                                        <div class="result-value" id="total-packets">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="result-item">
+                                        <h4>Safe Traffic</h4>
+                                        <div class="result-value text-success" id="safe-packets">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="result-item">
+                                        <h4>Intrusions</h4>
+                                        <div class="result-value text-danger" id="intrusion-packets">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <canvas id="results-chart" height="250"></canvas>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alert" id="analysis-message">
+                                    <h5><i class="fas fa-info-circle"></i> <span id="message-title"></span></h5>
+                                    <p id="message-content"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="intrusion-details">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Detected Intrusions</h4>
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="intrusion-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Confidence</th>
+                                            <th>Packet Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Packet Details -->
+<div class="modal fade" id="packet-details-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Packet Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-sm" id="packet-details-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/prediction.js') }}"></script>
+{% endblock %}

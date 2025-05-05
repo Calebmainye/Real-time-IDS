@@ -1,0 +1,163 @@
+/* Authentication CSS for CyberShield IDS */
+
+.auth-container {
+    min-height: calc(100vh - 170px);
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(25, 45, 78, 0.8), rgba(43, 95, 180, 0.8));
+    background-size: cover;
+    position: relative;
+    padding: 4rem 0;
+}
+
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.auth-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-header {
+    padding: 2.5rem 2rem 1.5rem;
+    position: relative;
+}
+
+.logo-container {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2.5rem;
+    box-shadow: 0 10px 20px rgba(43, 95, 180, 0.3);
+}
+
+.auth-header h2 {
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+    color: var(--secondary);
+    margin-bottom: 0;
+}
+
+.auth-body {
+    padding: 1.5rem 2rem 2.5rem;
+}
+
+.auth-footer {
+    padding: 1.5rem 2rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.auth-footer p {
+    margin-bottom: 0;
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+    padding-left: 0;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+.toggle-password {
+    border-left: none;
+}
+
+.password-strength {
+    display: none;
+}
+
+.password-strength.active {
+    display: block;
+}
+
+.progress-bar {
+    transition: width 0.3s ease;
+}
+
+.progress-bar.weak {
+    background-color: var(--danger);
+}
+
+.progress-bar.medium {
+    background-color: var(--warning);
+}
+
+.progress-bar.strong {
+    background-color: var(--success);
+}
+
+/* Animation for form submission */
+@keyframes formSubmit {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.btn-primary {
+    box-shadow: 0 5px 15px rgba(43, 95, 180, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(43, 95, 180, 0.4);
+}
+
+.btn-primary:active {
+    animation: formSubmit 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .auth-card {
+        margin: 1rem;
+    }
+    
+    .auth-header, .auth-body, .auth-footer {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}

@@ -1,0 +1,6 @@
+destination_port,flow_duration,fwd_packet_length_max,fwd_packet_length_min,fwd_packet_length_mean,bwd_packet_length_max,bwd_packet_length_min,flow_packets/s,flow_iat_mean,flow_iat_std,flow_iat_max,fwd_iat_mean,fwd_iat_std,fwd_iat_min,bwd_iat_std,bwd_iat_max,bwd_iat_min,fwd_psh_flags,bwd_packets/s,min_packet_length,max_packet_length,packet_length_mean,packet_length_variance,fin_flag_count,psh_flag_count,ack_flag_count,urg_flag_count,down/up_ratio,init_win_bytes_backward,idle_std
+80,1.5,1500,64,800,1500,64,100,0.01,0.005,0.02,0.01,0.005,0.001,0.005,0.02,0.001,1,100,64,1500,800,1000,1,1,1,0,1.0,1000,0.5
+443,2.3,1460,60,750,1460,60,150,0.008,0.004,0.015,0.008,0.004,0.0008,0.004,0.015,0.0008,1,150,60,1460,750,900,1,1,1,0,1.2,1000,0.4
+53,0.8,512,40,300,512,40,200,0.005,0.003,0.01,0.005,0.003,0.0005,0.003,0.01,0.0005,0,200,40,512,300,400,0,0,1,0,1.5,1000,0.3
+22,3.2,1400,50,700,1400,50,80,0.015,0.007,0.025,0.015,0.007,0.002,0.007,0.025,0.002,1,80,50,1400,700,800,1,1,1,0,0.8,1000,0.6
+25,1.2,1200,45,600,1200,45,120,0.012,0.006,0.018,0.012,0.006,0.0015,0.006,0.018,0.0015,1,120,45,1200,600,700,1,1,1,0,1.1,1000,0.45 
