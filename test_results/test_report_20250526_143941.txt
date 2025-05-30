@@ -1,0 +1,37 @@
+Test Execution Summary
+=====================
+Execution Time: 20250526_143941
+
+Model Tests:
+- Total Tests: 3
+- Passed: 2
+- Failed: 1
+- Success Rate: 66.7%
+
+API Tests:
+- Total Tests: 3
+- Passed: 3
+- Failed: 0
+- Success Rate: 100%
+
+Performance Tests:
+- Total Tests: 3
+- Passed: 3
+- Failed: 0
+- Success Rate: 100%
+
+Coverage Report:
+===============
+- Total Coverage: 98%
+- Lines Covered: 980
+- Lines Missed: 20
+- Coverage Percentage: 98%
+
+Performance Metrics:
+===================
+- Average Response Time: 0.18s
+- Memory Usage: 72MB
+- CPU Usage: 41%
+- Concurrent Requests: 95/s
+
+Overall Success Rate: 88.9%

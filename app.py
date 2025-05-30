@@ -217,5 +217,20 @@ def get_alerts():
     
     return jsonify(alerts)
 
+@app.route('/monitor')
+def monitor():
+    if 'user' not in session:
+        return jsonify({'error': 'Unauthorized'}), 401
+    
+    # Get monitoring status
+    status = {
+        'status': 'active',
+        'packets_analyzed': len(alerts),
+        'last_alert': alerts[-1] if alerts else None,
+        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    }
+    
+    return jsonify(status)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)

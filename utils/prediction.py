@@ -278,3 +278,36 @@ class IntrusionDetector:
         except Exception as e:
             logger.error(f"Error getting model info: {str(e)}")
             raise
+
+def predict_intrusion(data, model, scaler, threshold):
+    """
+    Predict whether the given network traffic data represents an intrusion.
+    
+    Args:
+        data (pd.DataFrame): Input data containing network traffic features
+        model: Trained machine learning model
+        scaler: Fitted scaler for feature normalization
+        threshold (float): Classification threshold
+        
+    Returns:
+        dict: Prediction results containing:
+            - is_intrusion (bool): Whether the traffic is classified as an intrusion
+            - confidence (float): Confidence score of the prediction
+    """
+    try:
+        # Scale the features
+        X_scaled = scaler.transform(data)
+        
+        # Make prediction
+        prediction = model.predict_proba(X_scaled)[:, 1]
+        
+        # Apply threshold
+        is_intrusion = prediction >= threshold
+        
+        # Return results
+        return {
+            'is_intrusion': bool(is_intrusion[0]),
+            'confidence': float(prediction[0])
+        }
+    except Exception as e:
+        raise Exception(f"Error during prediction: {str(e)}")
