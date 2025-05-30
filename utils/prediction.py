@@ -47,7 +47,7 @@ class IntrusionDetector:
         """
         try:
             # Load model
-            model_path = os.path.join(self.model_dir, 'final_model.joblib')
+            model_path = os.path.join(self.model_dir, 'final_model_compressed.joblib')
             self.model = joblib.load(model_path)
             logger.info(f"Model loaded successfully from {model_path}")
             
